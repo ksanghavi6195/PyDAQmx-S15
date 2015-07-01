@@ -79,15 +79,8 @@ DAQmxWriteAnalogF64(taskHandleOutput, N_samples, True, timeout, DAQmx_Val_GroupB
 time7 = time.time() - time6 - time0
 print 'out data written/plot start', time7 
 
-print data
-print 'left', data[0:N_samples]
-print 'right', data[N_samples:2*N_samples]
-
-# outLeft = []
-# outRight = []
-# for i in xrange(len(data)):
-# 	outLeft = outLeft + [data[i][0]]
-# 	outRight = outRight + [data[i][1]]
+print 'left channel:', data[0:N_samples]
+print 'right channel:', data[N_samples:2*N_samples]
 
 time8_1 = time.time() - time7 - time0
 print 'outLeft/Right created', time8_1
