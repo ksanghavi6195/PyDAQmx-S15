@@ -82,15 +82,13 @@ print 'out data written/plot start', time7
 print 'left channel:', data[0:N_samples]
 print 'right channel:', data[N_samples:2*N_samples]
 
-time8_1 = time.time() - time7 - time0
+time8 = time.time() - time7 - time0
 print 'outLeft/Right created', time8_1
 
-if len(data) % 2 == 0:
-	plt.plot(range(N_samples), data[0:N_samples], 'bo', range(N_samples), data[N_samples:2*N_samples], 'ro')
+plt.plot(range(N_samples), data[0:N_samples], 'bo', range(N_samples), data[N_samples:2*N_samples], 'ro')
 
-
-time8_2 = time.time() - time8_1 - time0
+time9 = time.time() - time8 - time0
 print 'plotted', time8_2
 
 plt.show()
-print 'plot was open for %fs' % (time.time() - time8_2 - time0)
+print 'plot was open for %fs' % (time.time() - time9 - time0)
