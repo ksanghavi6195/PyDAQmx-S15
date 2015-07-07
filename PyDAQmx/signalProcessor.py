@@ -10,7 +10,7 @@ N_samples = log_rate * seconds
 
 num_trials = 2
 
-def waveGen(length):
+def generateWave(length):
 	# Generate an array to be sent
 	return np.random.rand(length)
 
@@ -40,17 +40,23 @@ def plotGraphs(xAxis, yAxis, plotType):
 	plt.show()
 	
 def run():
-	waveGen0 = waveGen(N_samples)
-	# TODO: Send array
-	# waveRecieved = signalIn(N_samples)
-	normalizedWave = normalize(waveGen0)
+	waveGen = generateWave(N_samples)
+	
+	# TODO: Send an array which will be recieved
+
+	# TryExcept here so function does not fail when not connected to DAQ
+	try:
+		waveRecieved = signalIn(N_samples)
+		normalizedWave = normalize(waveRecieved)
+	except:
+		normalizedWave = normalize(waveGen)
+	# initialize a numpy array which will be appended to
 	allTrials = normalizedWave
 	for remainingTrials in xrange(num_trials - 1):
-		waveGenN = waveGen(N_samples)
-		# TODO: Send array
-		# waveRecieved = signalIn(N_samples)
-		normalizedWave = normalize(waveGenN)
-		allTrials = np.vstack((allTrials, normalizedWave))
+		try:
+			allTrials = np.vstack((allTrials, waveRecieved))
+		except:
+			allTrials = np.vstack((allTrials, normalizedWave))
 	averagedArray = average(allTrials)
 	plotGraphs(N_samples, averagedArray, 'bo')
 
