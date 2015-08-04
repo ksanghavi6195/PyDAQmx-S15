@@ -6,7 +6,7 @@ read = int32()
 data = numpy.zeros((10,), dtype=numpy.float64)
 
 # DAQmx Configure Code
-analog_input.CreateAIVoltageChan("Dev1/audioInputLeft","inputLeft",DAQmx_Val_Cfg_Default,-2.0,2.0,DAQmx_Val_Volts,None)
+analog_input.CreateAIVoltageChan("Dev4/audioInputLeft","inputLeft",DAQmx_Val_Cfg_Default,-2.0,2.0,DAQmx_Val_Volts,None)
 # analog_input.CreateAIVoltageChan("Dev1/audioInputRight","inputRight",DAQmx_Val_Cfg_Default,-2.0,2.0,DAQmx_Val_Volts,None)
 analog_input.CfgSampClkTiming("",10000.0,DAQmx_Val_Rising,DAQmx_Val_FiniteSamps,10)
 

@@ -17,10 +17,10 @@ class CallbackTaskSynchronous(Task):
     def __init__(self, dev_name=None, data_len=1000):
         Task.__init__(self)
         if dev_name is None:
-            dev_name = "Dev1"
+            dev_name = "Dev4"
         self._data = zeros(1000)
         self.read = int32()
-        self.CreateAIVoltageChan(dev_name+"/ai0","",DAQmx_Val_RSE,-10.0,10.0,DAQmx_Val_Volts,None)
+        self.CreateAIVoltageChan(dev_name+"/audioInputLeft","",DAQmx_Val_RSE,-2.0,2.0,DAQmx_Val_Volts,None)
         self.CfgSampClkTiming("",100000.0,DAQmx_Val_Rising,DAQmx_Val_ContSamps,1000)
         self.AutoRegisterEveryNSamplesEvent(DAQmx_Val_Acquired_Into_Buffer,1000,0)
         self.AutoRegisterDoneEvent(0)
@@ -51,6 +51,6 @@ if __name__=="__main__":
     for _ in range(10):
         task.get_data(timeout=10.0)
         print "Acquired %d points" % task.read.value
-
+    print task._data, len(task._data)
     task.StopTask()
     task.ClearTask()
